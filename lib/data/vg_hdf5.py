@@ -31,7 +31,7 @@ class vg_hdf5(Dataset):
         # read in dataset from a h5 file and a dict (json) file
         assert os.path.exists(self.data_dir), \
             "cannot find folder {}, please download the visual genome data into this folder".format(self.data_dir)
-        self.im_h5 = h5py.File(self.image_file, 'r')
+        self.im_h5 = h5py.File("/home/aung/av_av/script/imdb_1024.h5", 'r')
         self.info = json.load(open(os.path.join(self.data_dir, "VG-SGG-dicts.json"), 'r'))
         self.im_refs = self.im_h5['images'] # image data reference
         im_scale = self.im_refs.shape[2]
@@ -61,6 +61,10 @@ class vg_hdf5(Dataset):
         self.contiguous_category_id_to_json_id = {
             v: k for k, v in self.json_category_id_to_contiguous_id.items()
         }
+        
+        self.image_index = self.im_h5['valid_idx']
+        size = [self.im_h5['image_widths'][0], self.im_h5['image_heights'][0]]
+        self.im_sizes = np.asarray([size for i in range(len(self.image_index))])
 
     @property
     def coco(self):

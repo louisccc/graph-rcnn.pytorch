@@ -5,7 +5,7 @@ DATASET:
   TEST_BATCH_SIZE: 1
 MODEL:
   WEIGHT_IMG: "catalog://ImageNetPretrained/MSRA/R-101"
-  WEIGHT_DET: ""
+  WEIGHT_DET: "/home/aung/NAS/louisccc/av/checkpoints/sg_baseline_joint_ckpt.pth"
   RELATION_ON: True
   ALGORITHM: "sg_baseline"
   USE_FREQ_PRIOR: False
